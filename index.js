@@ -22,6 +22,19 @@ function saveToLocalStorage(event){
     // showDataOnScreen(obj)
 }
 
+window.addEventListener("DOMContentLoaded",()=>{
+    axios.get("https://crudcrud.com/api/297a522d3cc7446fa3cefebd59c1b72d/appointment")
+    .then((response)=>{
+        console.log(response)
+        for(var i=0;i<response.data.length;i++){
+            showDataOnScreen(response.data[i])
+        }
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+})
+
 //show data on screen
 function showDataOnScreen(exp){
     document.getElementById('amount').value='';
