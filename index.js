@@ -10,9 +10,16 @@ function saveToLocalStorage(event){
         Description,
         category
     }
-    localStorage.setItem(obj.amount,JSON.stringify(obj));
+     axios.post("https://crudcrud.com/api/297a522d3cc7446fa3cefebd59c1b72d/appointment", obj)
+    .then((respone) => {
+        console.log(respone)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+    // localStorage.setItem(obj.amount,JSON.stringify(obj));
     
-    showDataOnScreen(obj)
+    // showDataOnScreen(obj)
 }
 
 //show data on screen
