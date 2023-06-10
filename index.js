@@ -28,7 +28,9 @@ window.addEventListener("DOMContentLoaded",()=>{
         console.log(response)
         for(var i=0;i<response.data.length;i++){
             showDataOnScreen(response.data[i])
+            
         }
+
     })
     .catch((err)=>{
         console.log(err)
@@ -40,10 +42,10 @@ function showDataOnScreen(exp){
     document.getElementById('amount').value='';
     document.getElementById('Description').value='';
     document.getElementById('category').value='';
-
+    
     const parentNode=document.getElementById('expenseList');
-    const childNode=`<li id=${exp.amount}> ${exp.amount} - ${exp.Description} - ${exp.category}
-                        <button onclick=deleteExp('${exp.amount}')>Delete</button>
+    const childNode=`<li id=${exp._id}> ${exp.amount} - ${exp.Description} - ${exp.category}
+                        <button onclick=deleteExp('${exp._id}')>Delete</button>
                         <button onclick=editExpence('${exp.amount}','${exp.Description}','${exp.category}')>
                         Edit</button>
                      </li>`
@@ -51,7 +53,15 @@ function showDataOnScreen(exp){
 }
 //delete from storage
 function deleteExp(dlt){
-    localStorage.removeItem(dlt);
+
+    axios.delete(`https://crudcrud.com/api/297a522d3cc7446fa3cefebd59c1b72d/appointment/${dlt}`)
+    .then((response)=>{
+        console.log(response)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+    // localStorage.removeItem(dlt);
     deleteExpScreen(dlt)
 
 }
@@ -59,7 +69,7 @@ function deleteExp(dlt){
 function deleteExpScreen(dlt){
     const parentNode=document.getElementById('expenseList');
     const deleteNode=document.getElementById(dlt);
-
+    console.log(deleteNode)
     parentNode.removeChild(deleteNode);
 
 
